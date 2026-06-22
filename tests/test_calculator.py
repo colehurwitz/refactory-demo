@@ -5,7 +5,7 @@ import sys
 
 import pytest
 
-from calculator import add, subtract, multiply, divide
+from calculator import add, subtract, multiply, divide, power, modulo
 
 
 def test_add():
@@ -31,6 +31,22 @@ def test_divide():
 def test_divide_by_zero():
     with pytest.raises(ValueError, match="Cannot divide by zero"):
         divide(1, 0)
+
+
+def test_power():
+    assert power(2, 3) == 8.0
+    assert power(2, -1) == 0.5
+    assert power(5, 0) == 1.0
+
+
+def test_modulo():
+    assert modulo(10, 3) == 1.0
+    assert modulo(-7, 3) == 2.0
+
+
+def test_modulo_by_zero():
+    with pytest.raises(ValueError, match="Cannot modulo by zero"):
+        modulo(5, 0)
 
 
 def test_non_numeric_argument():
