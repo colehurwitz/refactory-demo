@@ -26,11 +26,23 @@ def divide(a: float, b: float) -> float:
     return a / b
 
 
+def power(a: float, b: float) -> float:
+    """Raise a to the power of b."""
+    return a ** b
+
+
+def modulo(a: float, b: float) -> float:
+    """Return a modulo b."""
+    if b == 0:
+        raise ValueError("Cannot modulo by zero")
+    return a % b
+
+
 def main():
     """Main entry point."""
     if len(sys.argv) < 4:
         print("Usage: calculator.py <operation> <num1> <num2>")
-        print("Operations: add, subtract, multiply, divide")
+        print("Operations: add, subtract, multiply, divide, power, modulo")
         sys.exit(1)
 
     operation = sys.argv[1]
@@ -50,6 +62,10 @@ def main():
             result = multiply(num1, num2)
         elif operation == "divide":
             result = divide(num1, num2)
+        elif operation == "power":
+            result = power(num1, num2)
+        elif operation == "modulo":
+            result = modulo(num1, num2)
         else:
             print(f"Unknown operation: {operation}")
             sys.exit(1)
