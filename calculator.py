@@ -14,11 +14,23 @@ def subtract(a: float, b: float) -> float:
     return a - b
 
 
+def multiply(a: float, b: float) -> float:
+    """Multiply two numbers."""
+    return a * b
+
+
+def divide(a: float, b: float) -> float:
+    """Divide a by b."""
+    if b == 0:
+        raise ValueError("Cannot divide by zero")
+    return a / b
+
+
 def main():
     """Main entry point."""
     if len(sys.argv) < 4:
         print("Usage: calculator.py <operation> <num1> <num2>")
-        print("Operations: add, subtract")
+        print("Operations: add, subtract, multiply, divide")
         sys.exit(1)
 
     operation = sys.argv[1]
@@ -26,12 +38,20 @@ def main():
     num1 = float(sys.argv[2])
     num2 = float(sys.argv[3])
 
-    if operation == "add":
-        result = add(num1, num2)
-    elif operation == "subtract":
-        result = subtract(num1, num2)
-    else:
-        print(f"Unknown operation: {operation}")
+    try:
+        if operation == "add":
+            result = add(num1, num2)
+        elif operation == "subtract":
+            result = subtract(num1, num2)
+        elif operation == "multiply":
+            result = multiply(num1, num2)
+        elif operation == "divide":
+            result = divide(num1, num2)
+        else:
+            print(f"Unknown operation: {operation}")
+            sys.exit(1)
+    except ValueError as e:
+        print(e)
         sys.exit(1)
 
     print(f"Result: {result}")
