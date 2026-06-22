@@ -34,9 +34,12 @@ def main():
         sys.exit(1)
 
     operation = sys.argv[1]
-    # BUG: No validation - crashes on non-numeric input
-    num1 = float(sys.argv[2])
-    num2 = float(sys.argv[3])
+    try:
+        num1 = float(sys.argv[2])
+        num2 = float(sys.argv[3])
+    except ValueError:
+        print("Error: Arguments must be numeric")
+        sys.exit(1)
 
     try:
         if operation == "add":

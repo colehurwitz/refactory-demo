@@ -1,5 +1,8 @@
 """Tests for calculator."""
 
+import subprocess
+import sys
+
 import pytest
 
 from calculator import add, subtract, multiply, divide
@@ -28,3 +31,13 @@ def test_divide():
 def test_divide_by_zero():
     with pytest.raises(ValueError, match="Cannot divide by zero"):
         divide(1, 0)
+
+
+def test_non_numeric_argument():
+    result = subprocess.run(
+        [sys.executable, "calculator.py", "add", "hello", "5"],
+        capture_output=True,
+        text=True,
+    )
+    assert result.returncode == 1
+    assert "Error: Arguments must be numeric" in result.stdout
